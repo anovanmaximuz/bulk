@@ -12,32 +12,16 @@ class text{
     public function nowCheck(string $string){
         //football vs soccer
         $random = str_split($string);
-        $unik = array_unique($random);
-    
-        $hitung = array_count_values($random);
-        
+        $unik = array_unique($random);    
+        $hitung = array_count_values($random);        
         $arraym = array();
         $x=0;
         foreach($random as $list){
             $arraym[$x] = $list;
             $x++;
         }
-        
-        echo '<pre>ddd';
-        //print_r($arraym);
-        
-         echo '<br>-----------<br>';
-        $char = array();
-        print_r($hitung);   
-        echo '<br>';
 
-        
-        //echo $arraym[2];
-        echo '<br>-----------<br>';
-        //BEFORE
-        
-        $this->generateMap($unik, $hitung, $arraym);
-       
+        $this->generateMap($unik, $hitung, $arraym);       
     }   
     
     private function generateMap($unik, $hitung, $arraym){
@@ -45,7 +29,7 @@ class text{
         $after = $this->getAfter($hitung, $arraym);
         $mapping = array();
         foreach($unik as $list){
-            $mapping[] = $list.":".$hitung[$list].":before:".implode(",", $before[$list]).":after:".implode(",", $after[$list]);
+            $mapping[] = $list.":".$hitung[$list].":before:".((isset($before[$list])) ? implode(",", $before[$list]): "none").":after:".((isset($after[$list])) ? implode(",", $after[$list]):"none");
         }
         
         
