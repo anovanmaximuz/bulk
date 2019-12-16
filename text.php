@@ -13,6 +13,7 @@ class text{
         //football vs soccer
         $random = str_split($string);
         $unik = array_unique($random);
+    
         $hitung = array_count_values($random);
         
         $arraym = array();
@@ -22,15 +23,14 @@ class text{
             $x++;
         }
         
-        echo '<pre>';
-        print_r($arraym);
+        echo '<pre>ddd';
+        //print_r($arraym);
         
          echo '<br>-----------<br>';
         $char = array();
         print_r($hitung);   
         echo '<br>';
-        $sebelum= $this->getBefore("o", $random);
-        echo $sebelum;
+
         
         //echo $arraym[2];
         echo '<br>-----------<br>';
@@ -42,16 +42,21 @@ class text{
     
     private function generateMap($unik, $hitung, $arraym){
         $before = $this->getBefore($hitung, $arraym);
-        print_r($before);
+        $after = $this->getAfter($hitung, $arraym);
+        $mapping = array();
+        foreach($unik as $list){
+            $mapping[] = $list.":".$hitung[$list].":before:".implode(",", $before[$list]).":after:".implode(",", $after[$list]);
+        }
         
-        echo '<br>-----------<br>';
-        //AFTER
-        $after = $this->getAfter($hitung, $arraym); 
-        print_r($after);
+        
+        echo json_encode($mapping);
+        //print_r($before);
+       // print_r($after);
+
     }
 
         //check for only one from multi
-    public function getBefore($hitung, $arraym){
+    private function getBefore($hitung, $arraym){
          $hexa = array();
         foreach($hitung as $key => $val){            
                 foreach($arraym as $pos => $isi){
@@ -67,7 +72,7 @@ class text{
         
     }
     
-    public function getAfter($hitung, $arraym){
+    private function getAfter($hitung, $arraym){
          $hexa = array();
         foreach($hitung as $key => $val){            
                 foreach($arraym as $pos => $isi){
