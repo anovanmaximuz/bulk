@@ -25,12 +25,7 @@ class text{
         echo '<pre>';
         print_r($arraym);
         
-        echo '<br>-----------<br>';
-        //BEFORE
-        $before = $this->getBefore($hitung, $arraym);
-        print_r($before);
-        
-        echo '<br>-----------<br>';
+         echo '<br>-----------<br>';
         $char = array();
         print_r($hitung);   
         echo '<br>';
@@ -38,18 +33,50 @@ class text{
         echo $sebelum;
         
         //echo $arraym[2];
-    }    
+        echo '<br>-----------<br>';
+        //BEFORE
+        
+        $this->generateMap($unik, $hitung, $arraym);
+       
+    }   
     
-    //check for only one from multi
+    private function generateMap($unik, $hitung, $arraym){
+        $before = $this->getBefore($hitung, $arraym);
+        print_r($before);
+        
+        echo '<br>-----------<br>';
+        //AFTER
+        $after = $this->getAfter($hitung, $arraym); 
+        print_r($after);
+    }
+
+        //check for only one from multi
     public function getBefore($hitung, $arraym){
          $hexa = array();
         foreach($hitung as $key => $val){            
                 foreach($arraym as $pos => $isi){
                     if($isi == $key){
-                        $hexa[$key][] = $arraym[$pos+1];
+                        if(isset($arraym[$pos+1]) && strlen($arraym[$pos+1])>0 && $arraym[$pos+1] !=" " ){
+                            $hexa[$key][] = $arraym[$pos+1];
+                        }
                     }
-                }               
-            
+                } 
+        }
+        
+        return $hexa;
+        
+    }
+    
+    public function getAfter($hitung, $arraym){
+         $hexa = array();
+        foreach($hitung as $key => $val){            
+                foreach($arraym as $pos => $isi){
+                    if($isi == $key){
+                        if(isset($arraym[$pos-1]) && strlen($arraym[$pos-1])>0 && $arraym[$pos-1] !=" " ){
+                            $hexa[$key][] = $arraym[$pos-1];
+                        }
+                    }
+                } 
         }
         
         return $hexa;
