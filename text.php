@@ -14,22 +14,45 @@ class text{
         $random = str_split($string);
         $unik = array_unique($random);
         $hitung = array_count_values($random);
+        
+        $arraym = array();
+        $x=0;
+        foreach($random as $list){
+            $arraym[$x] = $list;
+            $x++;
+        }
+        
+        echo '<pre>';
+        print_r($arraym);
+        
+        echo '<br>-----------<br>';
+        //BEFORE
+        $before = $this->getBefore($hitung, $arraym);
+        print_r($before);
+        
+        echo '<br>-----------<br>';
         $char = array();
         print_r($hitung);   
         echo '<br>';
-        echo $this->getBefore("f", $random);
-    }
+        $sebelum= $this->getBefore("o", $random);
+        echo $sebelum;
+        
+        //echo $arraym[2];
+    }    
     
-    
-    //check for only one
-    public function getBefore(string $char, array $stringRandom){
-        //test for f only if one
-        $pos = array_search($char, $stringRandom); 
-        if($pos==0){
-            return $stringRandom[1];
-        }else{
-            return $stringRandom[1];
+    //check for only one from multi
+    public function getBefore($hitung, $arraym){
+         $hexa = array();
+        foreach($hitung as $key => $val){            
+                foreach($arraym as $pos => $isi){
+                    if($isi == $key){
+                        $hexa[$key][] = $arraym[$pos+1];
+                    }
+                }               
+            
         }
+        
+        return $hexa;
         
     }
     
