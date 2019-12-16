@@ -21,21 +21,24 @@ class text{
             $x++;
         }
 
-        $this->generateMap($unik, $hitung, $arraym);       
+        $this->generateMap($unik, $hitung, $arraym, $string);       
     }   
     
-    private function generateMap($unik, $hitung, $arraym){
+    private function generateMap($unik, $hitung, $arraym, $string){
+        if($this->checkLong($string)){
+        
         $before = $this->getBefore($hitung, $arraym);
         $after = $this->getAfter($hitung, $arraym);
         $mapping = array();
         foreach($unik as $list){
             $mapping[] = $list.":".$hitung[$list].":before:".((isset($before[$list])) ? implode(",", $before[$list]): "none").":after:".((isset($after[$list])) ? implode(",", $after[$list]):"none");
         }
-        
-        
         echo json_encode($mapping);
         //print_r($before);
        // print_r($after);
+        }else{
+            die("(not longer then 255 chars");
+        }
 
     }
 
