@@ -12,9 +12,23 @@ class text{
     public function nowCheck(string $string){
         //football vs soccer
         $random = str_split($string);
+        $unik = array_unique($random);
+        $hitung = array_count_values($random);
         $char = array();
-        foreach ($random as $huruf){
-            
+        print_r($hitung);   
+        echo '<br>';
+        echo $this->getBefore("f", $random);
+    }
+    
+    
+    //check for only one
+    public function getBefore(string $char, array $stringRandom){
+        //test for f only if one
+        $pos = array_search($char, $stringRandom); 
+        if($pos==0){
+            return $stringRandom[1];
+        }else{
+            return $stringRandom[1];
         }
         
     }
