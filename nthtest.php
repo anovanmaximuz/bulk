@@ -7,7 +7,7 @@ final class nthtest extends TestCase
 {
     public function testAngka(){
         $angka = new nth();
-        $this->assertEquals(0,$angka->check(99));
+        $this->assertEquals(0,$angka->check(1000000));
     }
 }
 
